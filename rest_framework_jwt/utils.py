@@ -93,7 +93,7 @@ def jwt_encode_handler(payload):
         payload,
         key,
         api_settings.JWT_ALGORITHM
-    ).decode('utf-8')
+    )
 
 
 def jwt_decode_handler(token):
@@ -101,17 +101,17 @@ def jwt_decode_handler(token):
         'verify_exp': api_settings.JWT_VERIFY_EXPIRATION,
     }
     # get user from token, BEFORE verification, to get user secret key
-    unverified_payload = jwt.decode(token, None, False)
+    unverified_payload = jwt.decode(token, None, verify=False)
     secret_key = jwt_get_secret_key(unverified_payload)
     return jwt.decode(
         token,
         api_settings.JWT_PUBLIC_KEY or secret_key,
-        api_settings.JWT_VERIFY,
+        algorithms=[api_settings.JWT_ALGORITHM],
         options=options,
-        leeway=api_settings.JWT_LEEWAY,
+        verify=api_settings.JWT_VERIFY,
         audience=api_settings.JWT_AUDIENCE,
         issuer=api_settings.JWT_ISSUER,
-        algorithms=[api_settings.JWT_ALGORITHM]
+        leeway=api_settings.JWT_LEEWAY,
     )
 
 

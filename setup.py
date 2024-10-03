@@ -18,16 +18,16 @@ def get_version(package):
         return re.search("__version__ = ['\"]([^'\"]+)['\"]", src).group(1)
 
 
-name = 'djangorestframework-jwt'
+name = 'djangorestframework-jwt-joinup'
 version = get_version('rest_framework_jwt')
 package = 'rest_framework_jwt'
 description = 'JSON Web Token based authentication for Django REST framework'
-url = 'https://github.com/jpadilla/django-rest-framework-jwt'
+url = 'https://github.com/we-are-Joinup/django-rest-framework-jwt'
 author = 'Jose Padilla'
 author_email = 'jpadilla@getblimp.com'
 license = 'MIT'
 install_requires = [
-    'PyJWT>=1.5.2',
+    'PyJWT>=2.0.0',
 ]
 
 
